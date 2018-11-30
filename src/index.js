@@ -8,32 +8,27 @@ export default class App extends Component {
             latitude: null,
             errorMessage: ''
         }
+    }
+
+    componentDidMount() {
+        console.log("Component did mount")
         window.navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.setState({
-                    latitude: position.coords.latitude
-                })
-            },
-            (err) => {
-                this.setState({
-                    errorMessage: err.message
-                })
-            }
+            position => this.setState({ latitude: position.coords.latitude }),
+            err => this.setState({ errorMessage: err.message })
         )
     }
 
-
     render() {
-        if (this.state.errorMessage && !this.state.latitude){
+        if (this.state.errorMessage && !this.state.latitude) {
             return <div>Error: {this.state.errorMessage}</div>;
         }
 
-        if (!this.state.errorMessage && this.state.latitude){
+        if (!this.state.errorMessage && this.state.latitude) {
             return <div>Latitude: {this.state.latitude}</div>;
         }
-        
+
         return <div>Loading...</div>;
-        
+
     }
 }
 
