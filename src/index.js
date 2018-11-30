@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
+import Spinner from './Spinner';
 
 export default class App extends Component {
     state = {
         latitude: null,
         errorMessage: ''
-        
+
     }
 
     componentDidMount() {
@@ -14,7 +15,7 @@ export default class App extends Component {
         window.navigator.geolocation.getCurrentPosition(
             position => this.setState({ latitude: position.coords.latitude }),
             err => this.setState({ errorMessage: err.message })
-        )      
+        )
     }
 
     render() {
@@ -23,10 +24,10 @@ export default class App extends Component {
         }
 
         if (!this.state.errorMessage && this.state.latitude) {
-            return <SeasonDisplay lat={this.state.latitude}/>;
+            return <SeasonDisplay lat={this.state.latitude} />;
         }
 
-        return <div><i class="notched circle loading icon"></i>Loading...</div>;
+        return <Spinner message="Please accept location request" />;
 
     }
 }
