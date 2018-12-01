@@ -7,4 +7,10 @@ const Spinner = (props) => {
         </div>
     )
 }
+
+// you can set default properites to a component, good in case if you forget to add properties to the component.
+
+Spinner.defaultProps = {
+    message: "Loading..."
+}
 export default Spinner;

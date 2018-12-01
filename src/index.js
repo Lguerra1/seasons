@@ -17,8 +17,8 @@ export default class App extends Component {
             err => this.setState({ errorMessage: err.message })
         )
     }
-
-    render() {
+    //helper method
+    renderContent() {
         if (this.state.errorMessage && !this.state.latitude) {
             return <div>Error: {this.state.errorMessage}</div>;
         }
@@ -28,6 +28,14 @@ export default class App extends Component {
         }
 
         return <Spinner message="Please accept location request" />;
+    }
+
+    render() {
+        return (
+            <div className="border">
+                {this.renderContent()}
+            </div>
+        )
 
     }
 }
